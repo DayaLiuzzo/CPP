@@ -9,7 +9,7 @@ Fixed::Fixed()
 Fixed::Fixed(const Fixed &other)
 {
     print_message(CTOR_COPY_CALL, GREEN_COLOR);
-    nb_value = other.getRawBits();
+    *this = other;
 }
 Fixed::~Fixed()
 {
