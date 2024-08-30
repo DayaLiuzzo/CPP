@@ -65,9 +65,7 @@ int decimalNumbers(std::string input)
 //check type
 bool isChar(std::string input)
 {
-    if (input.length() == 1)
-        return true;
-    if (input.length() == 3 && input[0] == '\'' && input[2] == '\'')
+    if (input.length() == 1 && !isdigit(input[0]))
         return true;
     return false;
 }
@@ -130,20 +128,16 @@ bool isDouble(std::string input)
         return false;
     return true;
 }
-// display
+// display type
 void displayChar(char char_input, int decimalNumbers)
 {
     int f_decimal = decimalNumbers;
     int d_decimal = decimalNumbers;
 
     if (decimalNumbers > 6)
-    {
         f_decimal = 6;
-    }
     if (decimalNumbers > 15)
-    {
         d_decimal = 15;
-    }
     if (char_input < 32 || char_input > 126)
         print_message("char: Non displayable", RED_COLOR);
     else
@@ -158,13 +152,9 @@ void displayInt(int i, int decimalNumbers)
     int d_decimal = decimalNumbers;
 
     if (decimalNumbers > 6)
-    {
         f_decimal = 6;
-    }
     if (decimalNumbers > 15)
-    {
         d_decimal = 15;
-    }
     char c = static_cast<char>(i);
     if (c < 32 || c > 126)
         print_message("char: Non displayable", RED_COLOR);
@@ -181,12 +171,24 @@ void displayFloat(float f, int decimalNumbers)
     int d_decimal = decimalNumbers;
 
     if (decimalNumbers > 6)
-    {
         f_decimal = 6;
-    }
     if (decimalNumbers > 15)
-    {
         d_decimal = 15;
+    if (std::isnan(f)) 
+    {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: nanf" << std::endl;
+        std::cout << "double: nan" << std::endl;
+        return;
+    }
+    if (std::isinf(f)) 
+    {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: " << (f > 0 ? "inf" : "-inf") << "f" << std::endl;
+        std::cout << "double: " << (f > 0 ? "inf" : "-inf") << std::endl;
+        return;
     }
     char c = static_cast<char>(f);
     if (f < 32 || f > 126)
@@ -207,12 +209,24 @@ void displayDouble(double d, int decimalNumbers)
     int d_decimal = decimalNumbers;
 
     if (decimalNumbers > 6)
-    {
         f_decimal = 6;
-    }
     if (decimalNumbers > 15)
-    {
         d_decimal = 15;
+    if (std::isnan(d)) 
+    {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: nanf" << std::endl;
+        std::cout << "double: nan" << std::endl;
+        return;
+    }
+    if (std::isinf(d)) 
+    {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: " << (d > 0 ? "inf" : "-inf") << "f" << std::endl;
+        std::cout << "double: " << (d > 0 ? "inf" : "-inf") << std::endl;
+        return;
     }
     char c = static_cast<char>(d);
     if (d < 32 || d > 126)
@@ -226,14 +240,11 @@ void displayDouble(double d, int decimalNumbers)
     std::cout << "float: " << std::fixed << std::setprecision(f_decimal) << static_cast<float>(d) << "f" << std::endl;
         std::cout << "double: " << std::fixed << std::setprecision(d_decimal) << d << std::endl;
 }
-//get
+//get type
 char getChar(std::string str)
 {
-    if (str.length() == 1)
-        return str[0] - 48;
-    if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
-        return str[1] - 48;
-    return 0;
+ return str[0];
+
 }
 
 int get_int(std::string str)

@@ -1,4 +1,4 @@
-NAME = ScalarConversion
+NAME = convert
 
 S = src/
 O = obj/
