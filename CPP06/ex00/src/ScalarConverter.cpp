@@ -6,6 +6,26 @@
 #include <limits.h>
 # define FAILURE 1
 
+
+ScalarConverter::ScalarConverter()
+{
+}
+ScalarConverter::~ScalarConverter()
+{
+}
+ScalarConverter::ScalarConverter(const ScalarConverter &other)
+{
+    *this = other;
+}
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
+{
+    if (this != &other)
+    {
+        std::cout << "Assignment operator called" << std::endl;
+    }
+    return *this;
+}
+
 void ScalarConverter::convert(const std::string &input)
 {
     if (input.empty())
@@ -28,8 +48,8 @@ void ScalarConverter::convert(const std::string &input)
     {
         std::cout << "char: impossible" << std::endl;
         std::cout << "int: impossible" << std::endl;
-        std::cout << input << "f" << std::endl;
-        std::cout << input << std::endl;
+        std::cout << "float: impossible" << std::endl;
+        std::cout << "double: impossible" << std::endl;
         return;
     }
 } 
@@ -65,7 +85,7 @@ int decimalNumbers(std::string input)
 //check type
 bool isChar(std::string input)
 {
-    if (input.length() == 1 && !isdigit(input[0]))
+    if (input.length() == 3 && input[0] == '\'' && input[2] == '\'')
         return true;
     return false;
 }
@@ -94,6 +114,8 @@ bool isFloat(std::string input)
     if (input.empty())
         return false;
     size_t i = 0;
+    if (std::isnan(std::atof(input.c_str())) || std::isinf(std::atof(input.c_str())))
+        return true;
     if (input[i] == '+' || input[i] == '-')
         i++;
     for (;i < input.length(); i++)
@@ -212,22 +234,6 @@ void displayDouble(double d, int decimalNumbers)
         f_decimal = 6;
     if (decimalNumbers > 15)
         d_decimal = 15;
-    if (std::isnan(d)) 
-    {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl;
-        std::cout << "float: nanf" << std::endl;
-        std::cout << "double: nan" << std::endl;
-        return;
-    }
-    if (std::isinf(d)) 
-    {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl;
-        std::cout << "float: " << (d > 0 ? "inf" : "-inf") << "f" << std::endl;
-        std::cout << "double: " << (d > 0 ? "inf" : "-inf") << std::endl;
-        return;
-    }
     char c = static_cast<char>(d);
     if (d < 32 || d > 126)
         print_message("char: Non displayable", RED_COLOR);
@@ -243,7 +249,7 @@ void displayDouble(double d, int decimalNumbers)
 //get type
 char getChar(std::string str)
 {
- return str[0];
+ return str[1];
 
 }
 
