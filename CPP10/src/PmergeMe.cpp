@@ -221,14 +221,6 @@ int binarySearchInsert(std::vector<int> &vec, int value, std::vector<int> &jacob
     return(low);
 }
 
-void insertInOrder(std::vector<int> &vec, int value)
-{
-    int size = vec.size();
-    std::vector<int> jacob = generateJacobsthal(size);
-    int jacob_index = jacob.back();
-    int pos = binarySearchInsert(vec, value, jacob);
-    vec.push_back(value);
-}
 
 
 std::vector<int> generateJacobsthal(int n) 
@@ -251,12 +243,20 @@ std::vector<int> generateJacobsthal(int n)
     return jacobsthal;
 }
 
+void insertInOrder(std::vector<int> &vec, int value)
+{
+    int size = vec.size();
+    std::vector<int> jacob = generateJacobsthal(size);
+    int pos = binarySearchInsert(vec, value, jacob);
+    vec.insert(vec.begin() + pos, value);
+    // vec.push_back(value);
+}
 template<class C, class C_P>
 void FordJohnson(C &vec, C_P &vec_pair)
 {
     std::vector<int> jacob_pair;
     int value_to_insert = -1;
-    int top_value = -1;
+    // int top_value = -1;
     int n_p = vec_pair.size();
     
     vec.clear();
