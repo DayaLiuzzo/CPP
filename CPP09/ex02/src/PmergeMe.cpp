@@ -316,7 +316,6 @@ void PmergeMe::execute(int ac, char **av)
     start = clock();
     Merge_Insert_Sort(this->deque, deque_pair);
     end = clock();
-    print_container(this->deque, true);
     print_time(start, end, "deque", this->deque.size());
 }
 

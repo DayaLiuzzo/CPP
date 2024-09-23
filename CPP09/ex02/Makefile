@@ -1,4 +1,4 @@
-NAME = ex02
+NAME = PmergeMe
 
 S = src/
 O = obj/
@@ -11,8 +11,8 @@ LDFLAGS = -Wall -Werror -Wextra -std=c++98
 
 CFLAGS	+=	-I$(I) 
 
-SRCS	=	$(S)main.cpp \
-			$(S)utils.cpp
+SRCS	=	$(S)PmergeMe.cpp \
+			$(S)main.cpp
 
 RM	=	/bin/rm -rf
 

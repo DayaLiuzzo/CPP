@@ -26,7 +26,7 @@ bool check_arguments(int ac, char **av)
 
 int RPN(const std::string& expression) 
 {
-    std::stack<int, std::list<int> > s;
+    std::stack<float, std::list<float> > s;
     std::istringstream iss(expression);
     std::string token;
 
@@ -43,8 +43,8 @@ int RPN(const std::string& expression)
                 std::cerr << "Error: Not enough operands for operator " << token << std::endl;
                 return 0;
             }
-            int right = s.top(); s.pop();
-            int left = s.top(); s.pop();
+            float right = s.top(); s.pop();
+            float left = s.top(); s.pop();
             
             switch (token[0]) 
             {

@@ -53,6 +53,7 @@
         "iomanip": "cpp",
         "list": "cpp",
         "cstring": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "set": "cpp"
     }
 }
